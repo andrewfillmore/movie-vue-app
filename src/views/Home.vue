@@ -1,11 +1,11 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
-    <h2>New Movie</h2>
+    <!-- <h2>New Movie</h2>
     Title: <input type="text" v-model="newMovieTitle" /><br />
     Year: <input type="text" v-model="newMovieYear" /><br />
     Plot: <input type="text" v-model="newMoviePlot" /><br />
-    <button v-on:click="createMovie()">Add Movie</button>
+    <button v-on:click="createMovie()">Add Movie</button> -->
 
     <div v-for="movie in movies" :key="movie.id">
       <h3>Title: {{ movie.title }}</h3>
@@ -37,9 +37,6 @@ export default {
     return {
       message: "Welcome to Movies Vue App!",
       movies: [],
-      newMovieTitle: "",
-      newMovieYear: "",
-      newMoviePlot: "",
     };
   },
   created: function () {
@@ -52,25 +49,7 @@ export default {
         this.movies = response.data;
       });
     },
-    createMovie: function () {
-      var params = {
-        title: this.newMovieTitle,
-        year: this.newMovieYear,
-        plot: this.newMoviePlot,
-      };
-      axios
-        .post("http://localhost:3000/movies", params)
-        .then((response) => {
-          console.log("Success!", response.data);
-          this.movies.push(response.data);
-        })
-        .catch((error) => {
-          console.log(error.response.data.errors);
-        });
-      this.newMovieTitle = "";
-      this.newMovieYear = "";
-      this.newMoviePlot = "";
-    },
+
     showMovie: function (movie) {
       console.log(movie);
       document.querySelector("#movie-details").showModal();
