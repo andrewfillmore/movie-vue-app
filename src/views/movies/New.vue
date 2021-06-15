@@ -7,12 +7,7 @@
           {{ error }}
         </li>
       </ul>
-      <!-- <div>
-        Title: <input type="text" v-model="newMovieTitle" /><br />
-        Year: <input type="text" v-model="newMovieYear" /><br />
-        Plot: <input type="text" v-model="newMoviePlot" /><br />
-        
-      </div> -->
+
       <div class="form-group">
         <label>Title:</label>
         <input
@@ -30,6 +25,14 @@
         <label>Plot:</label>
         <input type="text" class="form-control" v-model="newMovieParams.plot" />
       </div>
+      <small {{ 250 - newMovieParams.plot.length }}>
+        characters remaining
+      </small>
+      <small
+        v-if="newPostParams.body.length > 0 && newPostParams.body.length > 200"
+        type="text-danger"
+        >Characters exceeding limit</small
+      >
       <button v-on:click="createMovie()">Add Movie</button>
       <input type="submit" class="btn btn-primary" value="Submit" />
     </form>
@@ -37,12 +40,18 @@
   </div>
 </template>
 
+<style scoped>
+text-danger {
+  color: red;
+}
+</style>
+
 <script>
 import axios from "axios";
 export default {
   data: function () {
     return {
-      newMovieParams: {},
+      newMovieParams: { body: "" },
       errors: [],
       newMovieTitle: "",
       newMovieYear: "",

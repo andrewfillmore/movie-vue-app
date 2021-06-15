@@ -22,7 +22,7 @@ const routes = [
     name: "signup",
     component: Signup,
   },
-  
+
   {
     path: "/login",
     name: "login",
@@ -51,7 +51,7 @@ const routes = [
   {
     path: "/movies/:id/edit",
     name: "movies-edit",
-    component: MoviesEdit
+    component: MoviesEdit,
   }
   
 ];
