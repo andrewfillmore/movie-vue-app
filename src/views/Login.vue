@@ -13,10 +13,24 @@
         <label>Password:</label>
         <input type="password" v-model="password" />
       </div>
-      <input type="submit" value="Submit" />
+      <input id="image" type="image" width="100" height="30" alt="Login"
+        src="https://raw.githubusercontent.com/mdn/learning-area/master/html/forms/image-type-example/login.png">
+      <br />
+      <p>Please select your preferred contact method:</p>
+      <div>
+        <input type="radio" id="contactChoice1" name="contact" value="email">
+        <label for="contactChoice1">Email</label>
+
+        <input type="radio" id="contactChoice2" name="contact" value="phone">
+        <label for="contactChoice2">Phone</label>
+
+        <input type="radio" id="contactChoice3" name="contact" value="mail">
+        <label for="contactChoice3">Mail</label>
+      </div>
     </form>
   </div>
 </template>
+
 
 <script>
 import axios from "axios";

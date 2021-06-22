@@ -6,7 +6,12 @@
     Year: <input type="text" v-model="newMovieYear" /><br />
     Plot: <input type="text" v-model="newMoviePlot" /><br />
     <button v-on:click="createMovie()">Add Movie</button> -->
-
+    <form>
+    
+  <div>
+    <button type="submit">Submit</button>
+  </div>
+  </form>
     <div v-for="movie in movies" :key="movie.id">
       <h3>Title: {{ movie.title }}</h3>
       <img :src="movie.image_url" alt="" /><br />

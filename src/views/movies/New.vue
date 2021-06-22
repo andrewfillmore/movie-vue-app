@@ -1,12 +1,19 @@
 <template>
   <div class="movies-new">
+
     <form v-on:submit.prevent="createMovie()">
       <h1>New Movie</h1>
+      <h2>New Movie</h2>
+      Title: <input type="text" v-model="newMovieTitle" /><br />
+      Year: <input type="text" v-model="newMovieYear" /><br />
+      Plot: <input type="text" v-model="newMoviePlot" /><br />
+      <button v-on:click="createMovie()">Add Movie</button>
       <ul>
         <li class="text-danger" v-for="error in errors" v-bind:key="error">
           {{ error }}
         </li>
       </ul>
+      <img v-if="status" :src="`https://http.cat/${status}`" alt="" />
 
       <div class="form-group">
         <label>Title:</label>

@@ -2,19 +2,17 @@
   <div class="movies-index">
     <div>
       <p>Search</p>
-      <input type="text" v-model="titleFilter" placeholder="Search Titles" />
+      <input type="text" v-model="searchTerm" placeholder="Search Titles" />
     </div>
-    <div
-      v-for="movie in filterBy(movies, titleFilter, 'title')"
-      v-bind:key="movie.id"
-    ></div>
-    <div v-for="movie in movies" v-bind:key="movie.id">
+
+    <div v-for="movie in filterBy(movies, searchTerm, 'title')" v-bind:key="movie.id">
       <h2>{{ movie.title }}</h2>
       <p>Year: {{ movie.year }}</p>
       <p>Plot: {{ movie.plot }}</p>
       <router-link :to="`/movies/${movie.id}`">Go to Movie</router-link>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -26,7 +24,7 @@ export default {
   data: function () {
     return {
       movies: [],
-      titleFilter: "",
+      searchTerm: "",
     };
   },
   created: function () {
