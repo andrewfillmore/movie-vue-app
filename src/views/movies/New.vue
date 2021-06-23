@@ -1,19 +1,17 @@
 <template>
   <div class="movies-new">
-
     <form v-on:submit.prevent="createMovie()">
       <h1>New Movie</h1>
-      <h2>New Movie</h2>
-      Title: <input type="text" v-model="newMovieTitle" /><br />
-      Year: <input type="text" v-model="newMovieYear" /><br />
-      Plot: <input type="text" v-model="newMoviePlot" /><br />
-      <button v-on:click="createMovie()">Add Movie</button>
       <ul>
         <li class="text-danger" v-for="error in errors" v-bind:key="error">
           {{ error }}
         </li>
       </ul>
       <img v-if="status" :src="`https://http.cat/${status}`" alt="" />
+      <!-- Title: <input type="text" v-model="newMovieTitle" /><br />
+      Year: <input type="text" v-model="newMovieYear" /><br />
+      Plot: <input type="text" v-model="newMoviePlot" /><br />
+      <button v-on:click="createMovie()">Add Movie</button> -->
 
       <div class="form-group">
         <label>Title:</label>
@@ -28,10 +26,12 @@
         <label>Year:</label>
         <input type="text" class="form-control" v-model="newMovieParams.year" />
       </div>
+
       <div class="form-group">
         <label>Plot:</label>
         <input type="text" class="form-control" v-model="newMovieParams.plot" />
       </div>
+
       <small {{ 250 - newMovieParams.plot.length }}>
         characters remaining
       </small>

@@ -1,17 +1,16 @@
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
-    <!-- <h2>New Movie</h2>
-    Title: <input type="text" v-model="newMovieTitle" /><br />
-    Year: <input type="text" v-model="newMovieYear" /><br />
-    Plot: <input type="text" v-model="newMoviePlot" /><br />
-    <button v-on:click="createMovie()">Add Movie</button> -->
+    <h2>New Movie</h2>
+    Title: <input type="text" v-model="newMovieParams.Title" /><br />
+    Year: <input type="text" v-model="newMovieParams.Year" /><br />
+    Plot: <input type="text" v-model="newMovieParams.Plot" /><br />
+    <button v-on:click="createMovie()">Add Movie</button>
     <form>
-    
-  <div>
-    <button type="submit">Submit</button>
-  </div>
-  </form>
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
     <div v-for="movie in movies" :key="movie.id">
       <h3>Title: {{ movie.title }}</h3>
       <img :src="movie.image_url" alt="" /><br />
@@ -42,6 +41,9 @@ export default {
     return {
       message: "Welcome to Movies Vue App!",
       movies: [],
+      newMovieParams: {},
+      currentMovie: {},
+      errors: [],
     };
   },
   created: function () {
@@ -54,9 +56,22 @@ export default {
         this.movies = response.data;
       });
     },
+    createMovie: function () {
+      axios
+        .post("/movies", this.newMovieParams)
+        .then((response) => {
+          console.log("Success!", response.data);
+          this.movies.push(response.data);
+        })
+        .catch((error) => {
+          console.log(error.response.data.errors);
+          this.errors = error.response.data.errors;
+        });
+    },
 
     showMovie: function (movie) {
       console.log(movie);
+      this.currentMovie = movie;
       document.querySelector("#movie-details").showModal();
     },
   },
